@@ -19,15 +19,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from config import config
 
 load_dotenv()
-
-# --- Configuration and Initialization ---
-
-# Set Groq API Key
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Initialize embeddings model
 def get_embeddings_model():
-    """Caches the HuggingFaceEmbeddings model."""
     return HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODEL_NAME)
 
 embeddings = get_embeddings_model()
@@ -45,7 +40,6 @@ vectordb = get_vector_store(embeddings)
 
 # Initialize the ChatGroq model
 def get_chat_model():
-    """Caches the ChatGroq model."""
     return ChatGroq(
         model="llama-3.1-8b-instant",
         temperature=0.0, # Lowering temperature for more consistent answers
@@ -135,12 +129,12 @@ def process_uploaded_file(uploaded_file, embeddings_model, vector_store):
 # --- Streamlit UI Setup ---
 
 st.set_page_config(page_title="Academic QA", layout="centered")
-st.title("💬 Academic QA")
+st.title("UrOWn RAG Chatbot")
 
 # File uploader section
 st.markdown("### 📄 Upload Documents")
 uploaded_files = st.file_uploader(
-    "Upload PDF files to ask questions about them",
+    "Dont need to create a RAG . just Upload PDF files and Use it as your RAG",
     type=["pdf"],
     accept_multiple_files=True,
     help="You can upload one or multiple PDF files"
